@@ -1,49 +1,74 @@
 # 🔐 LSB Image Steganography
 
 <p align="left">
-<img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
-<img src="https://img.shields.io/badge/LSB_Steganography-6A1B9A?style=for-the-badge" alt="LSB Steganography"/>
-<img src="https://img.shields.io/badge/BMP-37474F?style=for-the-badge" alt="BMP"/>
-<img src="https://img.shields.io/badge/GCC-00599C?style=for-the-badge&logo=gnu&logoColor=white" alt="GCC"/>
-<img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux"/>
-<img src="https://img.shields.io/badge/Bitwise_Operations-455A64?style=for-the-badge" alt="Bitwise Operations"/>
-<img src="https://img.shields.io/badge/File_Handling-00897B?style=for-the-badge" alt="File Handling"/>
+  <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
+  <img src="https://img.shields.io/badge/LSB_Steganography-6A1B9A?style=for-the-badge" alt="LSB Steganography"/>
+  <img src="https://img.shields.io/badge/BMP-37474F?style=for-the-badge" alt="BMP"/>
+  <img src="https://img.shields.io/badge/GCC-00599C?style=for-the-badge&logo=gnu&logoColor=white" alt="GCC"/>
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux"/>
+  <img src="https://img.shields.io/badge/Bitwise_Operations-455A64?style=for-the-badge" alt="Bitwise Operations"/>
+  <img src="https://img.shields.io/badge/File_Handling-00897B?style=for-the-badge" alt="File Handling"/>
 </p>
 
-A **C-based LSB Image Steganography project** that hides secret data inside an image by modifying the **Least Significant Bits (LSB)** of image data.
+> A C-based implementation of **LSB Image Steganography** for hiding and extracting secret data inside compatible BMP images.
 
-The project supports both **encoding** secret data into an image and **decoding** the hidden data from the generated stego image.
-
----
-
-## 🚀 Project Overview
-
-The application provides two primary operations:
-
-* **Encoding** — Hide a secret file inside a BMP image.
-* **Decoding** — Extract the hidden secret file from a stego image.
-
-The implementation provides hands-on experience with **C programming, bitwise operations, binary file handling, pointers, structures, and command-line arguments**.
+This project demonstrates practical use of **C programming, bitwise operations, binary file handling, pointers, structures, and command-line arguments** through an encoding and decoding workflow.
 
 ---
 
-## ✨ Key Features
+## 📑 Table of Contents
 
-* 🔐 Hide secret data inside an image using LSB steganography
-* 🔓 Extract hidden data from a stego image
-* 🖼️ BMP image-based data hiding
-* 📦 Stores secret file extension and size
-* 🔑 Uses a predefined magic string for decoding verification
-* 💾 Binary file handling
-* ⚙️ Command-line interface
-* 💻 Implemented entirely in C
-* 🐧 Designed for Linux / Unix-based environments
+1. [Overview](#1-overview)
+2. [Key Features](#2-key-features)
+3. [How It Works](#3-how-it-works)
+4. [LSB Concept](#4-lsb-concept)
+5. [Tech Stack](#5-tech-stack)
+6. [Project Structure](#6-project-structure)
+7. [Compilation](#7-compilation)
+8. [Usage](#8-usage)
+9. [Complete Workflow](#9-complete-workflow)
+10. [Testing](#10-testing)
+11. [Limitations](#11-limitations)
+12. [Learning Outcomes](#12-learning-outcomes)
+13. [Author](#13-author)
 
 ---
 
-## 🧠 How It Works
+# 1. Overview
 
-### 🔒 Encoding
+**LSB Image Steganography** is a C-based project that hides secret data inside an image by modifying the **Least Significant Bits (LSB)** of image data.
+
+The application supports two main operations:
+
+| Operation | Purpose |
+|---|---|
+| 🔒 Encoding | Hide a secret file inside a compatible BMP image |
+| 🔓 Decoding | Extract the hidden file from a stego image |
+
+During encoding, information such as the **magic string, secret file extension, file size, and file data** is embedded into the image.
+
+During decoding, the same information is extracted to reconstruct the original secret file.
+
+---
+
+# 2. Key Features
+
+- 🔐 Hide secret data using LSB steganography
+- 🔓 Extract hidden data from a stego image
+- 🖼️ BMP-based data hiding
+- 📦 Store secret file extension and size
+- 🔑 Magic-string verification during decoding
+- 💾 Binary file processing
+- ⚙️ Command-line interface
+- 🧩 Bitwise data manipulation
+- 💻 Implemented entirely in C
+- 🐧 Designed for Linux / Unix-based environments
+
+---
+
+# 3. How It Works
+
+## 🔒 Encoding
 
 During encoding, the application:
 
@@ -62,15 +87,17 @@ The resulting image is generated as the **stego image**.
 Source Image + Secret File
           │
           ▼
-    LSB Encoding
-          │
-          ▼
-       stego.bmp
+    ┌───────────────┐
+    │ LSB Encoding  │
+    └───────┬───────┘
+            │
+            ▼
+        stego.bmp
 ```
 
 ---
 
-### 🔓 Decoding
+## 🔓 Decoding
 
 During decoding, the application:
 
@@ -86,15 +113,17 @@ During decoding, the application:
      stego.bmp
           │
           ▼
-    LSB Decoding
-          │
-          ▼
-    Extracted Data
+    ┌───────────────┐
+    │ LSB Decoding  │
+    └───────┬───────┘
+            │
+            ▼
+      Extracted File
 ```
 
 ---
 
-## 🔍 Understanding LSB Steganography
+# 4. LSB Concept
 
 **Least Significant Bit (LSB)** steganography stores information by modifying the least significant bits of image data.
 
@@ -108,28 +137,29 @@ Modified image byte : 10110111
 
 Only the least significant bit is changed.
 
-A byte of secret data contains **8 bits**, which can be stored across 8 bytes of image data.
+A byte of secret data contains **8 bits**, which can be distributed across 8 bytes of image data.
 
-This allows data to be embedded while keeping the visual change to the image very small.
-
----
-
-## 🛠️ Tech Stack
-
-| Technology                 | Purpose                                 |
-| -------------------------- | --------------------------------------- |
-| **C**                      | Application development                 |
-| **LSB Steganography**      | Data hiding technique                   |
-| **BMP**                    | Image format used for embedding data    |
-| **GCC**                    | Compilation                             |
-| **Linux / Unix**           | Development and execution environment   |
-| **Bitwise Operations**     | LSB manipulation                        |
-| **File Handling**          | Binary image and secret file processing |
-| **Command-Line Arguments** | Program operation selection             |
+This allows information to be embedded while keeping the visual change to the image very small.
 
 ---
 
-## 📂 Project Structure
+# 5. Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| **C** | Core application development |
+| **LSB Steganography** | Data hiding technique |
+| **BMP** | Image format used for embedding |
+| **GCC** | Compilation |
+| **Linux / Unix** | Development and execution environment |
+| **Bitwise Operations** | LSB manipulation |
+| **File Handling** | Binary image and secret-file processing |
+| **Command-Line Arguments** | Encoding / decoding operation selection |
+| **Pointers & Structures** | Data and file management |
+
+---
+
+# 6. Project Structure
 
 ```text
 Steganography/
@@ -145,9 +175,12 @@ Steganography/
 ├── secret.txt
 └── README.md
 ```
+
+> File names may vary depending on the final source structure.
+
 ---
 
-## ⚙️ Compilation
+# 7. Compilation
 
 Compile all C source files using GCC:
 
@@ -163,20 +196,14 @@ a.out
 
 ---
 
-## 🚀 Usage
+# 8. Usage
 
-### 🔒 Encoding
+## 🔒 Encoding
 
 To hide `secret.txt` inside `beautiful.bmp`:
 
 ```bash
 ./a.out -e beautiful.bmp secret.txt
-```
-
-The program generates:
-
-```text
-stego.bmp
 ```
 
 ### Command Format
@@ -191,9 +218,15 @@ stego.bmp
 ./a.out -e beautiful.bmp secret.txt
 ```
 
+The program generates the stego image:
+
+```text
+stego.bmp
+```
+
 ---
 
-### 🔓 Decoding
+## 🔓 Decoding
 
 To extract the hidden data from `stego.bmp`:
 
@@ -213,104 +246,123 @@ To extract the hidden data from `stego.bmp`:
 ./a.out -d stego.bmp output
 ```
 
-The decoded file is generated using the specified output name along with the original secret file extension.
+The decoded file is generated using the specified output name along with the original secret-file extension.
 
 ---
 
-## 🔄 Complete Workflow
+# 9. Complete Workflow
 
 ```text
-                 ENCODING
-                     │
-                     ▼
-          ┌─────────────────────┐
-          │   beautiful.bmp     │
-          └──────────┬──────────┘
-                     │
-                     │
-              + secret.txt
-                     │
-                     ▼
-             ┌───────────────┐
-             │  LSB Encoding │
-             └───────┬───────┘
-                     │
-                     ▼
-                stego.bmp
-                     │
-                     │
-                     ▼
-             ┌───────────────┐
-             │  LSB Decoding │
-             └───────┬───────┘
-                     │
-                     ▼
-              Extracted File
+                         ENCODING
+                            │
+                            ▼
+                  ┌──────────────────┐
+                  │  beautiful.bmp   │
+                  └────────┬─────────┘
+                           │
+                           │ + secret.txt
+                           ▼
+                  ┌──────────────────┐
+                  │  LSB Encoding    │
+                  └────────┬─────────┘
+                           │
+                           ▼
+                      stego.bmp
+                           │
+                           ▼
+                  ┌──────────────────┐
+                  │  LSB Decoding    │
+                  └────────┬─────────┘
+                           │
+                           ▼
+                    Extracted File
+```
+
+### Typical Command Sequence
+
+```bash
+gcc *.c
+./a.out -e beautiful.bmp secret.txt
+./a.out -d stego.bmp output
 ```
 
 ---
 
-## 🧪 Testing
+# 10. Testing
 
-The complete encoding and decoding process can be tested using:
+The complete encoding and decoding process can be tested using the following steps.
 
-### 1. Compile
+### Step 1 — Compile
 
 ```bash
 gcc *.c
 ```
 
-### 2. Encode
+### Step 2 — Encode
 
 ```bash
 ./a.out -e beautiful.bmp secret.txt
 ```
 
-### 3. Decode
+### Step 3 — Decode
 
 ```bash
 ./a.out -d stego.bmp output
 ```
 
-The recovered file can then be compared with the original `secret.txt` to verify successful data extraction.
+### Step 4 — Verify
+
+The recovered file can be compared with the original `secret.txt` to verify that the hidden data was successfully extracted.
 
 ---
 
-## ⚠️ Limitations
+# 11. Limitations
 
-* The implementation is designed for compatible **BMP images**.
-* The source image must have sufficient capacity to store the secret data.
-* The stego image should remain in its original image format.
-* Image compression or modification may destroy the hidden data.
-* Successful decoding depends on using an image compatible with the implementation.
-
----
-
-## 📚 Learning Outcomes
-
-This project provides practical experience with:
-
-* C programming
-* File handling
-* Binary file operations
-* Bitwise operations
-* LSB manipulation
-* Image data processing
-* Command-line arguments
-* Pointers and structures
-* Encoding and decoding techniques
-* Data hiding using steganography
+| Limitation | Description |
+|---|---|
+| **Image Format** | Designed for compatible BMP images |
+| **Image Capacity** | Source image must have sufficient capacity to store the secret data |
+| **Image Modification** | Modifying the stego image may affect the hidden data |
+| **Compression** | Image compression may destroy embedded data |
+| **Compatibility** | Decoding depends on using an image compatible with the implementation |
 
 ---
 
-## 👨‍💻 Author
+# 12. Learning Outcomes
 
-**Sohan K**
+This project provided practical experience with:
 
-Embedded Systems & IoT Developer
+- C programming
+- File handling
+- Binary file operations
+- Bitwise operations
+- LSB manipulation
+- Image data processing
+- Command-line arguments
+- Pointers
+- Structures
+- Encoding and decoding techniques
+- Data hiding concepts
 
-🔗 **GitHub:**
-https://github.com/sohan2277
+---
 
-🔗 **LinkedIn:**
-https://www.linkedin.com/in/sohan2277/
+# 13. Author
+
+### Sohan K
+
+**Embedded Systems & IoT Developer**
+
+<p align="left">
+  <a href="https://github.com/sohan2277">
+    <img src="https://img.shields.io/badge/GitHub-sohan2277-181717?style=for-the-badge&logo=github" alt="GitHub"/>
+  </a>
+  <a href="https://www.linkedin.com/in/sohan2277/">
+    <img src="https://img.shields.io/badge/LinkedIn-Sohan%20K-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <b>🔐 C • Bitwise Operations • File Handling • LSB Steganography</b>
+</p>
